@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
       
       {/* Footer */}
       <footer className="text-center py-6 bg-gray-900">
-        <p>© {new Date().getFullYear()} AutoTransporter. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} LionKingExpressLLC. All rights reserved.</p>
       </footer>
     </div>
   );

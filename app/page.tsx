@@ -1,10 +1,10 @@
-="use client";
+"use client";
 
 import React from "react";
 import Link from "next/link";
 import { FaTruckMoving } from "react-icons/fa";
-import { Cover } from "../components/ui/Cover";
-import { TextGenerateEffect } from "../components/ui/TextGenerateEffect";
+import { Cover } from "@/components/ui/Cover";
+import { TextGenerateEffect } from "@/components/ui/TextGenerateEffect";
 
 export default function Home() {
   return (
@@ -75,7 +75,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="relative z-10 bg-transparent py-6">
         <div className="max-w-7xl mx-auto text-center text-gray-400">
-          © {new Date().getFullYear()} AutoTransporter. All rights reserved.
+          © {new Date().getFullYear()} LionKingExpressLLC. All rights reserved.
         </div>
       </footer>
 

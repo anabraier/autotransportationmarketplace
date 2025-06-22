@@ -4,18 +4,18 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function Login() {
+export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setMessage("");
 
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -23,10 +23,9 @@ export default function Login() {
 
       const data = await res.json();
       if (res.ok) {
-        localStorage.setItem("token", data.token);
-        setMessage("✅ Login successful! Redirecting...");
+        setMessage("✅ Registration successful! Redirecting to login...");
         setTimeout(() => {
-          router.push("/marketplace");
+          router.push("/login");
         }, 1500);
       } else {
         setMessage(`❌ ${data.message}`);
@@ -38,17 +37,22 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 to-black text-white flex flex-col">
-      {/* TOP CLICKABLE HEADER */}
+      {/* TOP HEADER TITLE */}
       <header className="p-6 text-center">
-        <Link href="/" className="text-4xl font-extrabold text-blue-300 hover:underline">
-          Lion King Express 
+        <Link
+          href="/"
+          className="text-4xl font-extrabold text-blue-400 hover:underline"
+        >
+          Lion King Express
         </Link>
       </header>
 
-      {/* Centered login form */}
+      {/* SIGNUP BOX */}
       <div className="flex-grow flex justify-center items-center">
-        <div className="relative bg-gray-900 p-8 rounded-lg shadow-lg w-96">
-          <h1 className="text-3xl font-bold mb-6 text-center text-blue-400">Login</h1>
+        <div className="bg-gray-900 p-8 rounded-lg shadow-lg w-96">
+          <h1 className="text-3xl font-bold mb-6 text-center text-blue-400">
+            Sign Up
+          </h1>
           {message && <p className="text-center text-red-500">{message}</p>}
 
           <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
@@ -72,21 +76,18 @@ export default function Login() {
               type="submit"
               className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg transition duration-300"
             >
-              Login
+              Sign Up
             </button>
           </form>
 
-          <div className="flex items-center my-4">
-            <div className="flex-grow border-t border-gray-700"></div>
-            <span className="px-3 text-gray-400">or</span>
-            <div className="flex-grow border-t border-gray-700"></div>
+          <div className="mt-4 text-center">
+            <p>Already have an account?</p>
+            <Link href="/login">
+              <button className="mt-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition duration-300">
+                Login Instead
+              </button>
+            </Link>
           </div>
-
-          <Link href="/signup">
-            <button className="w-full py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition duration-300">
-              Create an Account
-            </button>
-          </Link>
         </div>
       </div>
     </div>
